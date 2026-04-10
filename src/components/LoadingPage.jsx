@@ -1,15 +1,23 @@
 import Button from "./Button";
-function LoadingPage({ message }) {
+function LoadingPage({ message, desktopNotice = false }) {
     return (
       <section className="section loading-page">
-        <div className="error-msj">
+        <div className="loading-page-content">
+          <div className="loading-page-logo">
+          </div>
 
-        {message ? (<Button>{message}</Button>) : ( "")}
-          {/* <p>{message}</p> */}
+          {desktopNotice ? (
+            <Button type="button" className="desktop-only-button">
+              disponible solo para celulares
+            </Button>
+          ) : null}
         </div>
-        
-        <div className="loading-page-logo">
-        </div>
+
+        {message && !desktopNotice ? (
+          <div className="error-msj">
+            <Button type="button">{message}</Button>
+          </div>
+        ) : null}
       </section>
     );
   }

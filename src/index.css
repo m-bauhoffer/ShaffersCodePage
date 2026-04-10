@@ -941,10 +941,29 @@ button:active {
   -ms-flex-pack: center;
       justify-content: center;
 }
+.loading-page .loading-page-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+}
 .loading-page .error-msj {
   position: absolute;
   bottom: 2rem;
   color: #f0f0f0;
+  max-width: min(90vw, 24rem);
+}
+.loading-page .desktop-only-button {
+  margin-bottom: 0;
+  max-width: min(90vw, 22rem);
+  text-align: center;
+  line-height: 1.2;
+  cursor: default;
+  pointer-events: none;
 }
 .loading-page .loading-page-logo {
   height: 20vh;

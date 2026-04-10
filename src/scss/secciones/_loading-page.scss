@@ -6,14 +6,30 @@
     align-items: center;
     justify-content: center;
 
+    .loading-page-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+    }
 
     .error-msj{
       position: absolute;
       bottom: 2rem;
       color: $gris;
+      max-width: min(90vw, 24rem);
       // background-color: red;
     }
 
+    .desktop-only-button {
+      margin-bottom: 0;
+      max-width: min(90vw, 22rem);
+      text-align: center;
+      line-height: 1.2;
+      cursor: default;
+      pointer-events: none;
+    }
 
     .loading-page-logo {
       height: 20vh;
