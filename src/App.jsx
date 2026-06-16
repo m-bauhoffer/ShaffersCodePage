@@ -27,7 +27,7 @@ function App() {
 
     return window.matchMedia(MOBILE_MEDIA_QUERY).matches;
   });
-  const claimDiscountPromiseRef = useRef(null);
+  const hasRequestedCodeRef = useRef(false);
   const sectionsRef = useRef(null);
 
   const scrollToY = (vh) => setTranslateY(vh);
@@ -64,18 +64,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!isMobileDevice) {
+    if (!isMobileDevice || hasRequestedCodeRef.current) {
       return undefined;
     }
 
-    let isCancelled = false;
+    let isMounted = true;
+    hasRequestedCodeRef.current = true;
 
-    if (!claimDiscountPromiseRef.current) {
-      claimDiscountPromiseRef.current = claimDiscount();
-    }
+    const fetchCode = async () => {
+      const result = await claimDiscount();
 
-    claimDiscountPromiseRef.current.then((result) => {
-      if (isCancelled) {
+      if (!isMounted) {
         return;
       }
 
@@ -89,10 +88,12 @@ function App() {
       setPrice(result.price);
       setMessage("");
       setDataLoaded(true);
-    });
+    };
+
+    fetchCode();
 
     return () => {
-      isCancelled = true;
+      isMounted = false;
     };
   }, [isMobileDevice]);
 
